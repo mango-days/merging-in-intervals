@@ -32,16 +32,17 @@ def merge ( array1, array2 ) :
     return (new_interval)
 
 for index in range ( 0, len(intervals)-1 ) :
-    # check merge b/w intervals[index] & intervals[index+1]
+    x = intervals [ index ]
+    y = intervals [ index+1 ]
 
-    if  ( ( intervals [ index ] [0] < intervals [ index+1 ] [0] and intervals [ index+1 ] [0] < intervals [ index ] [1] ) or ( intervals [ index+1 ] [0] > intervals [ index ] [0] ) and intervals [ index ] [1] > intervals [ index+1 ] [0]) :
+    if  ( ( x[0]<y[0] and y[0]<x[1] ) or ( y[0]>x[0] ) and x[1]>y[0]) :
         #   merge and sort
-        temp = merge ( intervals [ index ] , intervals [ index+1 ])
+        temp = merge ( x , y )
         new_intervals.append ( temp )
 
-    elif ( intervals [ index ] [0] == intervals [ index+1 ] [1] or intervals [ index ] [1] == intervals [ index+1 ] [0] or intervals [ index ] [0] == intervals [ index+1 ] [0] or intervals [ index ] [1] == intervals [ index+1 ] [1] ) :
-        #   merge and sort, interval has a common element
-        temp = merge ( intervals [ index ] , intervals [ index+1 ])
+    elif ( x[0]==y[1] or x[1]==y[0] or x[0]==y[0] or x[1]==y[1] ) :
+        #   merge and sort because interval has a common element
+        temp = merge ( x , y )
         new_intervals.append ( temp )
         
 print ( new_intervals )
